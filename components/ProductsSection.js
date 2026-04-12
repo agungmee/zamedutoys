@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import ProductCard from './ProductCard';
 import ProductModal from './ProductModal';
 import styles from './ProductsSection.module.css';
@@ -34,13 +35,18 @@ export default function ProductsSection({ title = "Produk Terbaru", reverse = fa
     <section className={styles.section}>
       <div className={styles.header}>
         <h2 className={styles.heading}>{title}</h2>
-        <div className={styles.navButtons}>
-          <button className={styles.navBtn} onClick={() => scroll('left')} aria-label="Slide Left">
-            <i className="fa-solid fa-chevron-left"></i>
-          </button>
-          <button className={styles.navBtn} onClick={() => scroll('right')} aria-label="Slide Right">
-            <i className="fa-solid fa-chevron-right"></i>
-          </button>
+        <div className={styles.headerActions}>
+          <Link href={`/produk?sort=${reverse ? 'terlaris' : 'terbaru'}`} className={styles.viewAll}>
+            Lihat Semua <i className="fa-solid fa-arrow-right"></i>
+          </Link>
+          <div className={styles.navButtons}>
+            <button className={styles.navBtn} onClick={() => scroll('left')} aria-label="Slide Left">
+              <i className="fa-solid fa-chevron-left"></i>
+            </button>
+            <button className={styles.navBtn} onClick={() => scroll('right')} aria-label="Slide Right">
+              <i className="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -53,6 +59,15 @@ export default function ProductsSection({ title = "Produk Terbaru", reverse = fa
             />
           </div>
         ))}
+        {/* End card for Mobile Carousel */}
+        <div className={styles.viewAllMobileWrapper}>
+          <Link href={`/produk?sort=${reverse ? 'terlaris' : 'terbaru'}`} className={styles.viewAllCard}>
+            <div className={styles.viewAllIcon}>
+              <i className="fa-solid fa-arrow-right"></i>
+            </div>
+            <span>Lihat Semua</span>
+          </Link>
+        </div>
       </div>
 
       {selectedProduct && (

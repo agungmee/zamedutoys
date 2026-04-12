@@ -26,6 +26,28 @@
   margin: 0;
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.viewAll {
+  font-size: 0.95rem;
+  color: var(--accent-color, #ee4d2d);
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.viewAll:hover {
+  opacity: 0.8;
+  transform: translateX(4px);
+}
+
 .navButtons {
   display: flex;
   gap: 0.5rem;
@@ -62,11 +84,18 @@
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 2rem;
   padding: 0.5rem 2rem 2rem;
+  align-items: stretch; /* Ensure items stretch to equal height */
 }
 
 .cardWrapper {
   display: flex;
   flex-direction: column;
+  height: 100%;
+}
+
+.cardWrapper > * {
+  height: 100%;
+  width: 100%;
 }
 
 /* CAROUSEL MODE FOR MOBILE */
@@ -107,11 +136,53 @@
   .navButtons {
     display: flex;
   }
+
+  /* Carousel specific "View All" card */
+  .viewAllMobileWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    flex: 0 0 160px; /* Narrower than product cards */
+    padding-right: 2rem;
+  }
+
+  .viewAllCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #ee4d2d;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+
+  .viewAllIcon {
+    width: 50px;
+    height: 50px;
+    background-color: #fff0ed;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    border: 1px solid #fee2dc;
+  }
+
+  .viewAllCard:hover .viewAllIcon {
+    background-color: #ee4d2d;
+    color: #fff;
+  }
 }
 
-/* Hide nav buttons on desktop since it's a grid */
+/* Hide navigation buttons on desktop since it's a grid */
 @media (min-width: 769px) {
   .navButtons {
+    display: none;
+  }
+  .viewAllMobileWrapper {
     display: none;
   }
 }
