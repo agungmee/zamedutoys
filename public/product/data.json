@@ -1,0 +1,58 @@
+[
+  {
+    "id": "prod_1",
+    "title": "(Satuan) Papan Titian Warna Balance Beam",
+    "price": 42000,
+    "rating": 4.9,
+    "sold": "2RB+",
+    "media": ["/product/Satuan Papan Titian Warna Balance Beam.webp", "/product/Satuan Papan Titian Warna Balance Beam 2.webp"],
+    "stock": 150,
+    "variants": ["Papan Merah", "Papan Kuning", "Papan Hijau", "Papan Biru", "Dudukan Tinggi", "Dudukan Pendek"],
+    "brand": "ZAM Edutoys",
+    "category": "Motorik Kasar",
+    "tags": ["Mall", "ORI", "PROMO XTRA", "Pilih Lokal"],
+    "description": "Papan titian warna-warni untuk melatih keseimbangan dan motorik kasar anak. Terbuat dari kayu pinus halus berkualitas dan cat non-toxic water-based sehingga sangat aman bagi anak Anda."
+  },
+  {
+    "id": "prod_2",
+    "title": "Balance Board Big With Anti Slip",
+    "price": 147600,
+    "rating": 4.9,
+    "sold": "718",
+    "media": ["/product/Balance Board.jpeg", "/product/Balance Board.mp4"],
+    "stock": 45,
+    "variants": ["With Anti-slip", "Tanpa Anti-slip"],
+    "brand": "ZAM Edutoys",
+    "category": "Motorik Kasar",
+    "tags": ["Mall", "ORI", "PROMO XTRA", "Pilih Lokal"],
+    "description": "Balance Board klasik untuk melatih keseimbangan, imajinasi, dan postur anak.\nDimensi: besar dan melengkung dengan ketahanan beban maksimal."
+  },
+  {
+    "id": "prod_3",
+    "title": "Double Side Balance Beam Sensory Path (Perosotan Dua Sisi)",
+    "price": 319000,
+    "rating": 5.0,
+    "sold": "100+",
+    "media": ["/product/Double Side Balance Beam Sensory Path.webp", "/product/Double Side Balance Beam Sensory Path.mp4"],
+    "stock": 10,
+    "variants": ["Natural", "Berwarna"],
+    "brand": "ZAM Edutoys",
+    "category": "Sensori",
+    "tags": ["Mall", "ORI", "PROMO XTRA", "Pilih Lokal"],
+    "description": "Papan perosotan dua sisi (sisi polos untuk meluncur, sisi bertekstur/sensory step untuk sensori). Dapat dipasangkan pada pikler triangle."
+  },
+  {
+    "id": "prod_4",
+    "title": "Foldable Adjustable Helper Tower",
+    "price": 450000,
+    "rating": 4.8,
+    "sold": "20",
+    "media": ["/product/Foldable Adjustable Helper Tower Learning Tower Sudah Dirakit.webp", "/product/Foldable Adjustable Helper Tower Learning Tower Sudah Dirakit.mp4"],
+    "stock": 5,
+    "variants": ["Sudah Dirakit", "Belum Dirakit"],
+    "brand": "ZAM Edutoys",
+    "category": "Furniture Anak",
+    "tags": ["Mall", "ORI", "PROMO XTRA", "Pilih Lokal"],
+    "description": "Learning Tower bisa dilipat dengan tinggi yang dapat disesuaikan. Membantu si kecil mandiri di dapur atau area tinggi dengan aman."
+  }
+]

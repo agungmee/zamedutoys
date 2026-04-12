@@ -1,0 +1,168 @@
+.section {
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #fff9f7 0%, #fff 60%, #fef3ef 100%);
+  border-top: 1px solid #eaeaea;
+}
+
+.container {
+  max-width: var(--container-width, 1200px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* HEADER */
+.headingRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.iconWrap {
+  font-size: 2.2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 4px;
+}
+
+.sub {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0;
+}
+
+/* GROUPS */
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.groupTitle {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ee4d2d;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.groupTitle::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, #ffe0d8, transparent);
+}
+
+/* LOGOS GRID */
+.logos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 0.75rem;
+}
+
+/* LOGO CARD */
+.logoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: default;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.logoCard:hover {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+.logoSvg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 1;
+  border-radius: 6px;
+  display: block;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.logoImgWrapper {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+.logoName {
+  font-size: 0.65rem;
+  color: #999;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* FOOTER BADGES */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1rem;
+  background: #fff;
+  border: 1px solid #ffe0d8;
+  border-radius: 8px;
+  padding: 0.9rem 1.5rem;
+  font-size: 0.82rem;
+  color: #666;
+  text-align: center;
+}
+
+.footer span:nth-child(even) {
+  color: #ddd;
+  font-size: 0.7rem;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 1.2rem;
+  }
+
+  .heading {
+    font-size: 1.2rem;
+  }
+
+  .logos {
+    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .footer {
+    font-size: 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+}

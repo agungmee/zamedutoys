@@ -1,0 +1,15 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .brand { font-family: system-ui, sans-serif; font-weight: 900; font-size: 28px; fill: currentColor; }
+    .sub { font-family: system-ui, sans-serif; font-weight: 700; font-size: 13px; fill: currentColor; letter-spacing: 2.8px; }
+    .puzzle { fill: var(--accent-color, #f77f00); }
+  </style>
+  <g transform="translate(10, 30)">
+    <path class="puzzle" d="M 0 -18 L 12 6 L -12 6 Z" />
+    <circle cx="0" cy="-6" r="2.5" fill="var(--bg-color, white)" />
+    <circle cx="-5" cy="0" r="2.5" fill="var(--bg-color, white)" />
+    <circle cx="5" cy="0" r="2.5" fill="var(--bg-color, white)" />
+  </g>
+  <text x="35" y="28" class="brand">ZAM</text>
+  <text x="35" y="48" class="sub">EDUTOYS</text>
+</svg>

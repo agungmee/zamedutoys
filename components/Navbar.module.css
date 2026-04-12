@@ -1,0 +1,320 @@
+/* ─── NAVBAR ──────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 900;
+  transition: all 0.3s ease;
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.navbar.scrolled {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-sm);
+  height: calc(var(--nav-height) - 10px);
+}
+
+.container {
+  max-width: var(--container-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ─── LOGO ─────────────────────────────────────────────── */
+.brand { display: flex; align-items: center; }
+.logoWrapper { color: var(--text-primary); }
+.logoImage {
+  object-fit: contain;
+  object-position: left center;
+  transition: transform 0.3s ease;
+}
+.brand:hover .logoImage { transform: scale(1.03); }
+
+/* ─── DESKTOP LINKS ─────────────────────────────────────── */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.link {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+  position: relative;
+  transition: color 0.2s ease;
+  padding: 0.5rem 0;
+}
+.link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0px;
+  left: 0;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease;
+}
+.link:hover { color: var(--accent-color); }
+.link:hover::after { width: 100%; }
+
+.button {
+  background: var(--accent-color);
+  color: #fff !important;
+  padding: 0.55rem 1.4rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(247, 127, 0, 0.3);
+}
+.button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(247, 127, 0, 0.4);
+}
+
+/* ─── HAMBURGER ─────────────────────────────────────────── */
+.mobileToggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 24px;
+  position: relative;
+  z-index: 1001;
+  padding: 0;
+}
+
+.hamburger {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2.5px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  left: 0;
+  transition: all 0.3s ease;
+}
+.hamburger::before { top: -8px; }
+.hamburger::after  { bottom: -8px; }
+
+.mobileToggle.open .hamburger { background: transparent; }
+.mobileToggle.open .hamburger::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+.mobileToggle.open .hamburger::after {
+  transform: rotate(-45deg);
+  bottom: 0;
+}
+
+/* ─── OVERLAY ───────────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 950;
+  pointer-events: none;
+  transition: background 0.35s ease;
+}
+.overlayOpen {
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+  backdrop-filter: blur(2px);
+}
+
+/* ─── DRAWER ────────────────────────────────────────────── */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(320px, 85vw);
+  height: 100dvh;
+  background: #ffffff;
+  z-index: 1000;
+  transform: translateX(110%);
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: -8px 0 40px rgba(0,0,0,0.15);
+}
+.drawerOpen {
+  transform: translateX(0);
+}
+
+/* ─── DRAWER HEADER ─────────────────────────────────────── */
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.4rem;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fff;
+  flex-shrink: 0;
+}
+.drawerLogo {
+  object-fit: contain;
+  object-position: left center;
+}
+.closeBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #e8e8e8;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+.closeBtn:hover {
+  background: #fee;
+  color: #ee4d2d;
+  border-color: #ee4d2d;
+}
+
+/* ─── DRAWER NAV ITEMS ───────────────────────────────────── */
+.drawerNav {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.drawerItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.95rem 1.4rem;
+  margin: 0 0.6rem;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #222;
+  transition: background 0.18s ease, transform 0.18s ease;
+  animation: slideInItem 0.4s ease both;
+  position: relative;
+}
+.drawerItem:hover {
+  background: #fff4f1;
+  transform: translateX(4px);
+}
+.drawerItem:hover .drawerArrow {
+  color: #ee4d2d;
+  transform: translateX(2px);
+}
+
+@keyframes slideInItem {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Highlight item (Beli Grosir) */
+.drawerItemHighlight {
+  background: linear-gradient(135deg, #fff8f0 0%, #fff3e8 100%);
+  border: 1px solid #ffe0c4;
+  margin-top: 0.4rem;
+}
+.drawerItemHighlight:hover {
+  background: linear-gradient(135deg, #fff0e0 0%, #ffe8d0 100%);
+}
+.drawerItemHighlight .drawerLabel {
+  color: #e06b00;
+  font-weight: 700;
+}
+
+.drawerIcon {
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  background: #f7f7f7;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.drawerItemHighlight .drawerIcon {
+  background: #fff0e0;
+}
+
+.drawerText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.drawerLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+.drawerDesc {
+  font-size: 0.75rem;
+  color: #999;
+  font-weight: 400;
+}
+
+.drawerArrow {
+  color: #ccc;
+  flex-shrink: 0;
+  transition: color 0.2s, transform 0.2s;
+}
+
+/* ─── DRAWER FOOTER ─────────────────────────────────────── */
+.drawerFooter {
+  padding: 1.2rem 1.4rem;
+  border-top: 1px solid #f0f0f0;
+  background: #fafafa;
+  text-align: center;
+  flex-shrink: 0;
+}
+.drawerFooterText {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0 0 4px;
+}
+.drawerFooterSub {
+  font-size: 0.7rem;
+  color: #bbb;
+  margin: 0;
+}
+
+/* ─── RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .container { padding: 0 1rem; }
+  .navLinks  { display: none; }
+  .mobileToggle { display: block; }
+}

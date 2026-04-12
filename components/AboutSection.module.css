@@ -1,0 +1,116 @@
+.section {
+  padding: 3rem 2rem;
+  background-color: #ffffff;
+}
+
+.container {
+  max-width: var(--container-width, 1200px);
+  margin: 0 auto;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.textSide {
+  flex: 1;
+}
+
+.label {
+  display: inline-block;
+  color: #ee4d2d;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #222;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.feature {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.featureIcon {
+  font-size: 1.25rem;
+  width: 48px;
+  height: 48px;
+  background-color: #fff3ef;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.featureTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+}
+
+.featureText {
+  font-size: 0.95rem;
+  color: #888;
+  margin: 2px 0 0;
+}
+
+.imageSide {
+  flex: 1;
+}
+
+.imageFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 20px 20px 0px #fff3ef;
+}
+
+.image {
+  transition: transform 0.6s ease;
+}
+
+.imageFrame:hover .image {
+  transform: scale(1.05);
+}
+
+@media (max-width: 968px) {
+  .content {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .imageSide {
+    width: 100%;
+  }
+}
