@@ -137,6 +137,10 @@
     display: flex;
   }
 
+  .viewAll {
+    display: none;
+  }
+
   /* Carousel specific "View All" card */
   .viewAllMobileWrapper {
     display: flex;
