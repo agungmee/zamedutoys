@@ -23,6 +23,13 @@ export default function ProductsSection({ title = "Produk Terbaru", reverse = fa
       .catch(err => console.error("Error loading products:", err));
   }, [reverse]);
 
+  useEffect(() => {
+    // Reset horizontal scroll on load
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft = 0;
+    }
+  }, [products]);
+
   const scroll = (direction) => {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current;

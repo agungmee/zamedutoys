@@ -1,9 +1,16 @@
+"use client";
+import React, { useEffect } from 'react';
 import HeroSlider from "@/components/HeroSlider";
 import ProductsSection from "@/components/ProductsSection";
 import PaymentSection from "@/components/PaymentSection";
 import AboutSection from "@/components/AboutSection";
 
 export default function Home() {
+  useEffect(() => {
+    // Reset scroll to top on load
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <main style={{
       display: 'flex',
