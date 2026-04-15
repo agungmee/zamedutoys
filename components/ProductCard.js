@@ -13,12 +13,17 @@ export default function ProductCard({ product, onDetailClick }) {
     }).format(number);
   };
 
-  const mainMedia = product.media[0] || '/placeholder.png';
-  const isVideo = mainMedia.endsWith('.mp4');
+  const mainMedia = product.media ? product.media[0] : (product.images && product.images[0]) || '/placeholder.png';
+  const isVideo = mainMedia && mainMedia.endsWith('.mp4');
+  const isPreorder = product.is_preorder || false;
+  const preorderDays = product.preorder_days || 7;
 
   return (
     <div className={styles.card}>
       <div className={styles.imageContainer}>
+        {isPreorder && (
+          <div className={styles.preorderBadge}>PO ({preorderDays} hari)</div>
+        )}
         {isVideo ? (
           <video src={mainMedia} className={styles.image} autoPlay muted loop playsInline />
         ) : (

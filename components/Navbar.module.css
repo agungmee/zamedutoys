@@ -312,9 +312,31 @@
   margin: 0;
 }
 
+/* ─── SEARCH CONTAINER ──────────────────────────────────── */
+.searchNavContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
 /* ─── RESPONSIVE ────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .container { padding: 0 1rem; }
+  .container { 
+    padding: 0 0.8rem; 
+    flex-wrap: nowrap; 
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logoImage {
+    width: 120px;
+    height: auto;
+  }
+  .brand { order: 1; flex: 0 0 auto; }
+  .searchNavContainer {
+    order: 2;
+    flex: 1 1 auto;
+    margin: 0 10px;
+  }
+  .mobileToggle { order: 3; display: block; flex: 0 0 auto; margin-left: 0; }
   .navLinks  { display: none; }
-  .mobileToggle { display: block; }
 }

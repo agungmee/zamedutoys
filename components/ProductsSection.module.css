@@ -189,4 +189,13 @@
   .viewAllMobileWrapper {
     display: none;
   }
+  
+  /* Hanya tampilkan 4 produk di desktop */
+  .cardWrapper:nth-child(n+5) {
+    display: none;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

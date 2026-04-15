@@ -4,9 +4,12 @@ import Image from 'next/image';
 import styles from './ProductModal.module.css';
 
 export default function ProductModal({ product, onClose }) {
-  const [activeMedia, setActiveMedia] = useState(product.media[0]);
+  // Ambil varian default atau varian pertama
+  const initialVariant = product.product_variants?.find(v => v.is_default) || product.product_variants?.[0] || { name: 'Default', price: product.price };
+
+  const [activeVariant, setActiveVariant] = useState(initialVariant);
+  const [activeMedia, setActiveMedia] = useState(activeVariant.image_url || product.images?.[0] || '/placeholder.png');
   const [quantity, setQuantity] = useState(1);
-  const [activeVariant, setActiveVariant] = useState(product.variants[0]);
   const [showOrderForm, setShowOrderForm] = useState(false);
   const [orderData, setOrderData] = useState({ nama: '', noHp: '', alamat: '', catatan: '' });
   const [submitted, setSubmitted] = useState(false);
@@ -18,29 +21,51 @@ export default function ProductModal({ product, onClose }) {
   const formatRupiah = (number) =>
     new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
 
-  const totalHarga = product.price * quantity;
+  // Gunakan harga dari varian aktif
+  const currentPrice = activeVariant.price || product.price;
+  const totalHarga = currentPrice * quantity;
 
   const handleOrderChange = (e) => {
     setOrderData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handleVariantClick = (v) => {
+    setActiveVariant(v);
+    if (v.image_url) {
+      setActiveMedia(v.image_url);
+    }
+  };
+
   const handleSubmitOrder = (e) => {
     e.preventDefault();
+
+    let preorderInfo = '';
+    if (product.is_preorder) {
+      preorderInfo = `\n*Pre-Order*\nEstimasi: ${product.preorder_days || 7} hari\n`;
+    }
+
     const msg = encodeURIComponent(
       `*ORDER ZAM EDUTOYS*\n\n` +
       `Produk  : ${product.title}\n` +
-      `Varian  : ${activeVariant}\n` +
+      `Varian  : ${activeVariant.name}\n` +
       `Jumlah  : ${quantity} pcs\n` +
-      `Total   : ${formatRupiah(totalHarga)}\n\n` +
-      `*Data Pemesan*\n` +
+      `Total   : ${formatRupiah(totalHarga)}\n` +
+      preorderInfo +
+      `\n*Data Pemesan*\n` +
       `Nama    : ${orderData.nama}\n` +
       `No. HP  : ${orderData.noHp}\n` +
       `Alamat  : ${orderData.alamat}\n` +
       (orderData.catatan ? `Catatan : ${orderData.catatan}\n` : '')
     );
-    window.open(`https://wa.me/6281234567890?text=${msg}`, '_blank');
+    window.open(`https://wa.me/628995366864?text=${msg}`, '_blank');
     setSubmitted(true);
   };
+
+  // Gabungkan semua media: Gambar produk + Gambar varian
+  const allMedia = Array.from(new Set([
+    ...(product.images || []),
+    ...(product.product_variants?.map(v => v.image_url).filter(Boolean) || [])
+  ]));
 
   return (
     <div className={styles.backdrop} onClick={handleBackdropClick}>
@@ -58,7 +83,7 @@ export default function ProductModal({ product, onClose }) {
               )}
             </div>
             <div className={styles.thumbnails}>
-              {product.media.map((media, i) => (
+              {allMedia.map((media, i) => (
                 <div
                   key={i}
                   className={`${styles.thumbnailWrapper} ${activeMedia === media ? styles.activeThumbnail : ''}`}
@@ -78,27 +103,40 @@ export default function ProductModal({ product, onClose }) {
           <div className={styles.details}>
             <div className={styles.header}>
               <h2 className={styles.title}>{product.title}</h2>
+              {product.categories && (
+                <span className={styles.categoryBadge}>{product.categories.name}</span>
+              )}
             </div>
 
             <div className={styles.priceContainer}>
-              <span className={styles.price}>{formatRupiah(product.price)}</span>
+              <span className={styles.price}>{formatRupiah(currentPrice)}</span>
+              {product.is_preorder && (
+                <span className={`${styles.stockLabel} ${styles.preorderLabel}`}>
+                  Pre-Order ({product.preorder_days || 7} hari)
+                </span>
+              )}
+              {!product.is_preorder && activeVariant.stock !== undefined && (
+                <span className={styles.stockLabel}>Stok: {activeVariant.stock}</span>
+              )}
             </div>
 
             {/* Variants */}
-            <div className={styles.section}>
-              <span className={styles.label}>Varian</span>
-              <div className={styles.variants}>
-                {product.variants.map(v => (
-                  <button
-                    key={v}
-                    className={`${styles.variantBtn} ${activeVariant === v ? styles.variantActive : ''}`}
-                    onClick={() => setActiveVariant(v)}
-                  >
-                    {v}
-                  </button>
-                ))}
+            {product.product_variants?.length > 0 && (
+              <div className={styles.section}>
+                <span className={styles.label}>Pilih Variasi</span>
+                <div className={styles.variants}>
+                  {product.product_variants.map(v => (
+                    <button
+                      key={v.id}
+                      className={`${styles.variantBtn} ${activeVariant.id === v.id ? styles.variantActive : ''}`}
+                      onClick={() => handleVariantClick(v)}
+                    >
+                      {v.name}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Quantity */}
             <div className={styles.section}>
@@ -107,7 +145,6 @@ export default function ProductModal({ product, onClose }) {
                 <button onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</button>
                 <input type="number" readOnly value={quantity} />
                 <button onClick={() => setQuantity(q => q + 1)}>+</button>
-                <span className={styles.stock}>Tersisa &gt;10</span>
               </div>
             </div>
 
@@ -117,11 +154,19 @@ export default function ProductModal({ product, onClose }) {
               <p className={styles.description}>{product.description}</p>
             </div>
 
-            {/* Single Order Button */}
+            {/* Actions */}
             {!showOrderForm && (
               <div className={styles.actions}>
-                <button className={styles.orderBtn} onClick={() => setShowOrderForm(true)}>
-                  🛒 Order Sekarang
+                <button
+                  className={styles.orderBtn}
+                  onClick={() => setShowOrderForm(true)}
+                  disabled={activeVariant.stock === 0 && !product.is_preorder}
+                >
+                  {activeVariant.stock === 0 && !product.is_preorder
+                    ? 'Stok Habis'
+                    : product.is_preorder && activeVariant.stock === 0
+                      ? `🛒 Pre-Order (${product.preorder_days || 7} hari)`
+                      : '🛒 Order Sekarang'}
                 </button>
               </div>
             )}
@@ -132,7 +177,7 @@ export default function ProductModal({ product, onClose }) {
                 {submitted ? (
                   <div className={styles.successMsg}>
                     <span>✅</span>
-                    <p>Pesanan berhasil dikirim! Tim kami akan segera menghubungi Anda via WhatsApp.</p>
+                    <p>Pesanan berhasil dikirim!</p>
                     <button className={styles.closeOrderBtn} onClick={onClose}>Tutup</button>
                   </div>
                 ) : (
@@ -146,7 +191,7 @@ export default function ProductModal({ product, onClose }) {
                       </div>
                       <div className={styles.summaryRow}>
                         <span>Varian</span>
-                        <span className={styles.summaryVal}>{activeVariant}</span>
+                        <span className={styles.summaryVal}>{activeVariant.name}</span>
                       </div>
                       <div className={styles.summaryRow}>
                         <span>Jumlah</span>
@@ -163,7 +208,7 @@ export default function ProductModal({ product, onClose }) {
                         <label>Nama Lengkap *</label>
                         <input
                           type="text" name="nama" required
-                          placeholder="Masukkan nama lengkap Anda"
+                          placeholder="Nama Anda"
                           value={orderData.nama} onChange={handleOrderChange}
                         />
                       </div>
@@ -171,24 +216,16 @@ export default function ProductModal({ product, onClose }) {
                         <label>No. HP / WhatsApp *</label>
                         <input
                           type="tel" name="noHp" required
-                          placeholder="Contoh: 081234567890"
+                          placeholder="08..."
                           value={orderData.noHp} onChange={handleOrderChange}
                         />
                       </div>
                       <div className={styles.fieldGroup}>
                         <label>Alamat Lengkap *</label>
                         <textarea
-                          name="alamat" required rows={3}
-                          placeholder="Jalan, RT/RW, Kelurahan, Kecamatan, Kota, Kode Pos"
+                          name="alamat" required rows={2}
+                          placeholder="Alamat pengiriman"
                           value={orderData.alamat} onChange={handleOrderChange}
-                        />
-                      </div>
-                      <div className={styles.fieldGroup}>
-                        <label>Catatan (opsional)</label>
-                        <input
-                          type="text" name="catatan"
-                          placeholder="Warna, ukuran spesifik, atau permintaan lainnya"
-                          value={orderData.catatan} onChange={handleOrderChange}
                         />
                       </div>
 
@@ -197,7 +234,7 @@ export default function ProductModal({ product, onClose }) {
                           ← Kembali
                         </button>
                         <button type="submit" className={styles.submitBtn}>
-                          Konfirmasi via WhatsApp
+                          Konfirmasi WA
                         </button>
                       </div>
                     </form>
@@ -211,3 +248,4 @@ export default function ProductModal({ product, onClose }) {
     </div>
   );
 }
+

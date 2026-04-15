@@ -1,79 +1,91 @@
 .section {
-  padding: 3rem 2rem;
-  background: linear-gradient(135deg, #fff9f7 0%, #fff 60%, #fef3ef 100%);
-  border-top: 1px solid #eaeaea;
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #fffcfb 0%, #ffffff 50%, #fff9f7 100%);
+  border-top: 1px solid #f0f0f0;
+  width: 100%;
 }
 
 .container {
-  max-width: var(--container-width, 1200px);
+  max-width: 1440px; /* Increased for "full width" feel */
   margin: 0 auto;
+  padding: 0 4rem;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 3.5rem;
 }
 
 /* HEADER */
 .headingRow {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .iconWrap {
-  font-size: 2.2rem;
+  font-size: 2.8rem;
   line-height: 1;
-  flex-shrink: 0;
+  background: #fff5f2;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(238, 77, 45, 0.08);
 }
 
 .heading {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #222;
-  margin: 0 0 4px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1a1b1e;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
 }
 
 .sub {
-  font-size: 0.9rem;
-  color: #888;
+  font-size: 1rem;
+  color: #666;
   margin: 0;
+  font-weight: 500;
 }
 
 /* GROUPS */
 .groups {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .group {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1.25rem;
 }
 
 .groupTitle {
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 800;
   color: #ee4d2d;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
+  letter-spacing: 2px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 .groupTitle::after {
   content: '';
   flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, #ffe0d8, transparent);
+  height: 2px;
+  background: linear-gradient(to right, #ffe5dd, #fff);
+  border-radius: 2px;
 }
 
 /* LOGOS GRID */
 .logos {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Larger cards */
+  gap: 1.25rem;
 }
 
 /* LOGO CARD */
@@ -81,49 +93,61 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
   cursor: default;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .logoCard:hover {
-  transform: translateY(-3px);
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+  transform: translateY(-5px);
+}
+
+.logoCard:hover .logoSvg,
+.logoCard:hover .logoImgWrapper {
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+  border-color: #ee4d2d33;
 }
 
 .logoSvg {
   width: 100%;
   height: auto;
   aspect-ratio: 2 / 1;
-  border-radius: 6px;
+  border-radius: 12px;
   display: block;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+  background: #fff;
 }
 
 .logoImgWrapper {
   width: 100%;
   aspect-ratio: 2 / 1;
-  border-radius: 6px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border: 1px solid #f0f0f0;
   background: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .logoImg {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 4px;
+  padding: 12px;
 }
 
 .logoName {
-  font-size: 0.65rem;
-  color: #999;
-  font-weight: 500;
-  white-space: nowrap;
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
 }
 
 /* FOOTER BADGES */
@@ -132,37 +156,57 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem 1rem;
-  background: #fff;
-  border: 1px solid #ffe0d8;
-  border-radius: 8px;
-  padding: 0.9rem 1.5rem;
-  font-size: 0.82rem;
-  color: #666;
-  text-align: center;
+  gap: 1rem 2.5rem;
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  font-size: 0.95rem;
+  color: #444;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
 }
 
 .footer span:nth-child(even) {
-  color: #ddd;
-  font-size: 0.7rem;
+  color: #eee;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 3rem 1.2rem;
+    padding: 3rem 0;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+    gap: 2.5rem;
   }
 
   .heading {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+  }
+
+  .iconWrap {
+    width: 48px;
+    height: 48px;
+    font-size: 2rem;
+    border-radius: 12px;
   }
 
   .logos {
-    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
-    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.8rem;
   }
 
   .footer {
-    font-size: 0.75rem;
-    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    padding: 1rem;
+    gap: 0.8rem 1.2rem;
   }
 }
+

@@ -2,7 +2,7 @@
   background: white;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   border: 1px solid #ededed;
   display: flex;
   flex-direction: column;
@@ -13,14 +13,28 @@
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .imageContainer {
   position: relative;
   width: 100%;
-  padding-top: 100%; /* 1:1 Aspect ratio */
+  padding-top: 100%;
+  /* 1:1 Aspect ratio */
   background: #f7f7f7;
+}
+
+.preorderBadge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #ff9800;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  z-index: 2;
 }
 
 .image {
@@ -32,15 +46,41 @@
   object-fit: cover;
 }
 
-.promoTags { display: none; }
-.xtraTag { display: none; }
-.lokalTag { display: none; }
-.badges { display: none; }
-.mallBadge { display: none; }
-.oriBadge { display: none; }
-.brandName { display: none; }
-.badgesBottom { display: none; }
-.borderBadge { display: none; }
+.promoTags {
+  display: none;
+}
+
+.xtraTag {
+  display: none;
+}
+
+.lokalTag {
+  display: none;
+}
+
+.badges {
+  display: none;
+}
+
+.mallBadge {
+  display: none;
+}
+
+.oriBadge {
+  display: none;
+}
+
+.brandName {
+  display: none;
+}
+
+.badgesBottom {
+  display: none;
+}
+
+.borderBadge {
+  display: none;
+}
 
 .content {
   padding: 12px;
@@ -88,7 +128,8 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin-bottom: 4px;
-  height: 2.3em; /* Fixed height for 2 lines */
+  height: 2.3em;
+  /* Fixed height for 2 lines */
 }
 
 .price {

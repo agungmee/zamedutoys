@@ -1,8 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +12,40 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "ZAM EDUTOYS | Premium Educational Toys",
-  description: "Your best destination for educational toys and puzzles.",
+  title: {
+    template: '%s | ZAM Edutoys',
+    default: 'ZAM Edutoys | Produsen Mainan Edukasi Premium',
+  },
+  description: 'Pusat mainan edukasi kayu premium untuk anak usia dini. Asah motorik, sensori, dan kognitif si kecil dengan mainan yang aman, kuat, dan edukatif.',
+  keywords: ['mainan edukasi kayu', 'mainan anak', 'montessori', 'ZAM Edutoys', 'produsen mainan edukasi'],
+  authors: [{ name: 'ZAM Edutoys' }],
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
+  openGraph: {
+    title: 'ZAM Edutoys | Produsen Mainan Edukasi Premium',
+    description: 'Pusat mainan edukasi premium untuk anak. Kami fokus dalam meredesain kemandirian anak dengan produk edukasi terbaik.',
+    url: 'https://zamedutoys.com',
+    siteName: 'ZAM Edutoys',
+    images: [
+      {
+        url: '/logo.png',
+        width: 800,
+        height: 600,
+        alt: 'ZAM Edutoys Logo',
+      },
+    ],
+    locale: 'id_ID',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ZAM Edutoys',
+    description: 'Produsen Mainan Edukasi Premium Indonesia',
+    images: ['/logo.png'],
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -32,11 +61,9 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body suppressHydrationWarning>
-        <Navbar />
         {children}
-        <Footer />
-        <WhatsAppFloat />
       </body>
     </html>
   );
 }
+

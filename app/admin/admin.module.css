@@ -1,0 +1,25 @@
+.adminShell {
+  display: flex;
+  min-height: 100vh;
+  background: #0d0d14;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.adminMain {
+  flex: 1;
+  padding: 2rem;
+  margin-left: 280px; /* Lebar sidebar */
+  overflow-x: hidden;
+  background: #0d0d14;
+}
+
+@media (max-width: 768px) {
+  .adminShell {
+    flex-direction: column;
+  }
+  .adminMain {
+    padding: 1rem;
+    margin-left: 0; /* Reset margin on mobile */
+  }
+}
+

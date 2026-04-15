@@ -1,88 +1,30 @@
-"use client";
-import React, { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import ProductCard from './ProductCard';
-import ProductModal from './ProductModal';
-import styles from './ProductsSection.module.css';
+import { getProducts } from '@/app/actions/admin';
+import ProductsSectionClient from './ProductsSectionClient';
 
-export default function ProductsSection({ title = "Produk Terbaru", reverse = false }) {
-  const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const scrollRef = useRef(null);
-
-  useEffect(() => {
-    fetch('/product/data.json')
-      .then(res => res.json())
-      .then(data => {
-        if (reverse) {
-          setProducts(data.reverse());
-        } else {
-          setProducts(data);
-        }
-      })
-      .catch(err => console.error("Error loading products:", err));
-  }, [reverse]);
-
-  useEffect(() => {
-    // Reset horizontal scroll on load
-    if (scrollRef.current) {
-      scrollRef.current.scrollLeft = 0;
+export default async function ProductsSection({ title = "Produk Terbaru", reverse = false }) {
+  // Fetch dari Supabase server-side
+  let products = [];
+  try {
+    products = await getProducts({
+      featured: reverse ? true : undefined,
+    });
+    // Jika reverse (Terlaris), filter featured; else sort biasa
+    if (reverse) {
+      products = products.filter(p => p.is_featured);
     }
-  }, [products]);
-
-  const scroll = (direction) => {
-    if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current;
-      const scrollTo = direction === 'left' ? scrollLeft - clientWidth + 100 : scrollLeft + clientWidth - 100;
-      scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+    if (products.length === 0) {
+      // Fallback: ambil semua produk kalau filter kosong
+      products = await getProducts({});
     }
-  };
+  } catch (err) {
+    console.error('Failed to load products from Supabase:', err);
+  }
 
   return (
-    <section className={styles.section}>
-      <div className={styles.header}>
-        <h2 className={styles.heading}>{title}</h2>
-        <div className={styles.headerActions}>
-          <Link href={`/produk?sort=${reverse ? 'terlaris' : 'terbaru'}`} className={styles.viewAll}>
-            Lihat Semua <i className="fa-solid fa-arrow-right"></i>
-          </Link>
-          <div className={styles.navButtons}>
-            <button className={styles.navBtn} onClick={() => scroll('left')} aria-label="Slide Left">
-              <i className="fa-solid fa-chevron-left"></i>
-            </button>
-            <button className={styles.navBtn} onClick={() => scroll('right')} aria-label="Slide Right">
-              <i className="fa-solid fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.grid} ref={scrollRef}>
-        {products.map(product => (
-          <div key={product.id} className={styles.cardWrapper}>
-            <ProductCard 
-              product={product} 
-              onDetailClick={(prod) => setSelectedProduct(prod)} 
-            />
-          </div>
-        ))}
-        {/* End card for Mobile Carousel */}
-        <div className={styles.viewAllMobileWrapper}>
-          <Link href={`/produk?sort=${reverse ? 'terlaris' : 'terbaru'}`} className={styles.viewAllCard}>
-            <div className={styles.viewAllIcon}>
-              <i className="fa-solid fa-arrow-right"></i>
-            </div>
-            <span>Lihat Semua</span>
-          </Link>
-        </div>
-      </div>
-
-      {selectedProduct && (
-        <ProductModal 
-          product={selectedProduct} 
-          onClose={() => setSelectedProduct(null)} 
-        />
-      )}
-    </section>
+    <ProductsSectionClient
+      title={title}
+      products={products}
+      reverse={reverse}
+    />
   );
 }

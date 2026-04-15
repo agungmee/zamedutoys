@@ -32,7 +32,11 @@ a {
   color: inherit;
 }
 
-main {
+.has-nav {
   padding-top: var(--nav-height);
+}
+
+main {
   min-height: 100vh;
 }
+

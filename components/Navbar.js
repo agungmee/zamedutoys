@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import NavbarSearch from './NavbarSearch';
 import styles from './Navbar.module.css';
 
 const navItems = [
@@ -45,6 +46,11 @@ export default function Navbar() {
               />
             </div>
           </Link>
+
+          {/* Search Bar Desktop & Mobile */}
+          <div className={styles.searchNavContainer}>
+            <NavbarSearch />
+          </div>
 
           {/* Desktop links */}
           <div className={styles.navLinks}>
