@@ -9,10 +9,11 @@ export default function ProductForm({ action, defaultValues }) {
   const [state, formAction, pending] = useActionState(action, undefined);
   const [categories, setCategories] = useState([]);
   const [variants, setVariants] = useState((defaultValues?.product_variants || [
-    { name: 'Default', price: defaultValues?.price || 0, image_url: '', stock: defaultValues?.stock || 0, is_default: true }
+    { name: 'Default', price: defaultValues?.price || 0, original_price: defaultValues?.original_price || 0, image_url: '', stock: defaultValues?.stock || 0, is_default: true }
   ]).map(v => ({
     ...v,
-    image_url: v.image_url || ''
+    image_url: v.image_url || '',
+    original_price: v.original_price || 0
   })));
 
   const d = defaultValues || {};
@@ -34,7 +35,7 @@ export default function ProductForm({ action, defaultValues }) {
 
   // --- VARIANT LOGIC ---
   const addVariant = () => {
-    setVariants([...variants, { name: '', price: d.price || 0, image_url: '', stock: 0, is_default: false, preview: null }]);
+    setVariants([...variants, { name: '', price: d.price || 0, original_price: d.original_price || 0, image_url: '', stock: 0, is_default: false, preview: null }]);
   };
 
   const removeVariant = (index) => {
@@ -134,6 +135,19 @@ export default function ProductForm({ action, defaultValues }) {
         </div>
 
         <div className={styles.fieldGroup}>
+          <label htmlFor="prod-original-price" className={styles.label}>Harga Coret/Awal (Rp)</label>
+          <input
+            id="prod-original-price"
+            name="original_price"
+            type="number"
+            min="0"
+            className={styles.input}
+            placeholder="Contoh: 50000"
+            defaultValue={d.original_price || ''}
+          />
+        </div>
+
+        <div className={styles.fieldGroup}>
           <label htmlFor="prod-price-grosir" className={styles.label}>Harga Grosir (Rp)</label>
           <input
             id="prod-price-grosir"
@@ -144,6 +158,35 @@ export default function ProductForm({ action, defaultValues }) {
             placeholder="Opsional"
             defaultValue={d.price_grosir || ''}
           />
+        </div>
+
+        <div className={styles.fieldGroup}>
+          <label htmlFor="prod-weight" className={styles.label}>Estimasi Berat/Volume (kg) <span className={styles.required}>*</span></label>
+          <input
+            id="prod-weight"
+            name="weight_kg"
+            type="number"
+            step="0.01"
+            min="0"
+            className={styles.input}
+            placeholder="Contoh: 1.5"
+            defaultValue={d.weight_kg || ''}
+            required
+          />
+          <span className={styles.labelInfo}>Digunakan untuk rekomendasi ekspedisi</span>
+        </div>
+
+        <div className={styles.fieldGroup}>
+          <label htmlFor="prod-dimensions" className={styles.label}>Ukuran Paket (p x l x t)</label>
+          <input
+            id="prod-dimensions"
+            name="dimensions"
+            type="text"
+            className={styles.input}
+            placeholder="Contoh: 30x20x10 cm"
+            defaultValue={d.dimensions || ''}
+          />
+          <span className={styles.labelInfo}>Ukuran dus luar (Opsional)</span>
         </div>
 
         {/* Kategori & Brand */}
@@ -259,6 +302,13 @@ export default function ProductForm({ action, defaultValues }) {
                         placeholder="Harga"
                         value={v.price}
                         onChange={e => updateVariant(i, 'price', e.target.value)}
+                        className={styles.inputSmall}
+                      />
+                      <input
+                        type="number"
+                        placeholder="Hrg Coret"
+                        value={v.original_price}
+                        onChange={e => updateVariant(i, 'original_price', e.target.value)}
                         className={styles.inputSmall}
                       />
                       <input

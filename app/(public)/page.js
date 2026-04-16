@@ -1,9 +1,11 @@
 import { getProducts } from '@/app/actions/admin';
 import { getBanners } from '@/app/actions/banner';
+import { getCategories } from '@/app/actions/category';
 import HeroSlider from "@/components/HeroSlider";
 import ProductsSection from "@/components/ProductsSection";
 import PaymentSection from "@/components/PaymentSection";
 import AboutSection from "@/components/AboutSection";
+import CategoryIcons from "@/components/CategoryIcons";
 
 export const metadata = {
   title: 'Beranda',
@@ -17,6 +19,7 @@ export const metadata = {
 export default async function Home() {
   const products = await getProducts();
   const banners = await getBanners();
+  const categories = await getCategories();
 
   return (
     <div style={{
@@ -25,6 +28,10 @@ export default async function Home() {
       paddingBottom: '4rem',
     }}>
       <HeroSlider initialBanners={banners} />
+      <CategoryIcons categories={categories} />
+      <div style={{ padding: '0 2rem' }}>
+        <hr style={{ border: 'none', borderTop: '1px solid #eaeaea', margin: '0 auto', maxWidth: 'var(--container-width)' }} />
+      </div>
       <ProductsSection title="Produk Terbaru" />
       <div style={{ padding: '0 2rem' }}>
         <hr style={{ border: 'none', borderTop: '1px solid #eaeaea', margin: '1rem auto', maxWidth: 'var(--container-width)' }} />

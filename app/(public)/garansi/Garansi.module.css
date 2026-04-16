@@ -1,0 +1,245 @@
+.main {
+  padding: 4rem 1.5rem;
+  background-color: #ffffff;
+  min-height: 80vh;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.tagWrapper {
+  margin-bottom: 1.25rem;
+}
+
+.tag {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  padding: 0.5rem 1.25rem;
+  border-radius: 99px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid #dcfce7;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #000;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.04em;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #64748b;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.warrantyGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 3rem;
+  margin-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .warrantyGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.iconCircle {
+  width: 64px;
+  height: 64px;
+  background-color: #f8fafc;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  border: 1px solid #e2e8f0;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.card p {
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.highlightBox {
+  background-color: #f1f5f9;
+  padding: 4rem;
+  border-radius: 40px;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.highlightTitle {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  color: #0f172a;
+}
+
+.highlightText {
+  color: #475569;
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.claimBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #000;
+  color: white;
+  padding: 1.25rem 2.5rem;
+  border-radius: 99px;
+  text-decoration: none;
+  font-weight: 800;
+  transition: all 0.3s ease;
+}
+
+.claimBtn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+  background-color: #1e293b;
+}
+
+.accordionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 6rem;
+}
+
+.accordion {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.accordionHeader {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.accordionHeader:hover {
+  background: #f1f5f9;
+}
+
+.accordionHeader h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.chevron {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s;
+  color: #64748b;
+}
+
+.chevronActive {
+  transform: rotate(180deg);
+}
+
+.accordionContent {
+  padding: 0 2rem 2rem;
+  background: #fff;
+}
+
+.pointList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pointItem {
+  display: flex;
+  gap: 1rem;
+  color: #475569;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.pointNumber {
+  font-weight: 800;
+  color: #0f172a;
+  min-width: 24px;
+}
+
+.pointText b {
+  color: #000;
+  font-weight: 700;
+}
+
+.highlightedText {
+  color: #ee4d2d;
+  font-weight: 700;
+}
+
+.footerNotes {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 2.25rem;
+  }
+  .highlightBox {
+    padding: 2.5rem 1.5rem;
+  }
+  .accordionHeader {
+    padding: 1.25rem 1.5rem;
+  }
+  .accordionContent {
+    padding: 0 1.5rem 1.5rem;
+  }
+  .pointItem {
+    font-size: 1rem;
+  }
+}

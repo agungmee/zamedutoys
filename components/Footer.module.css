@@ -61,9 +61,9 @@
 }
 
 .linksSide {
-  flex: 2;
+  flex: 3;
   display: flex;
-  gap: 4rem;
+  gap: 2rem;
   justify-content: flex-end;
 }
 
@@ -88,6 +88,30 @@
 
 .link:hover {
   color: #ee4d2d;
+}
+
+.addressText {
+  font-size: 0.95rem;
+  color: #777;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.mapLink {
+  font-size: 0.95rem;
+  color: #ee4d2d;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  transition: opacity 0.2s;
+}
+
+.mapLink:hover {
+  opacity: 0.8;
+  text-decoration: underline;
 }
 
 .bottom {

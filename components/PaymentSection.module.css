@@ -14,6 +14,10 @@
   gap: 3.5rem;
 }
 
+.plainWrapper .container {
+  padding: 0;
+}
+
 /* HEADER */
 .headingRow {
   display: flex;
@@ -49,43 +53,11 @@
   font-weight: 500;
 }
 
-/* GROUPS */
-.groups {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-.group {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.groupTitle {
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: #ee4d2d;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.groupTitle::after {
-  content: '';
-  flex: 1;
-  height: 2px;
-  background: linear-gradient(to right, #ffe5dd, #fff);
-  border-radius: 2px;
-}
-
 /* LOGOS GRID */
 .logos {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Larger cards */
-  gap: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
 /* LOGO CARD */
@@ -109,7 +81,7 @@
 }
 
 .logoSvg {
-  width: 100%;
+  width: 130px; /* Specific width for 'one line' feel */
   height: auto;
   aspect-ratio: 2 / 1;
   border-radius: 12px;
@@ -121,7 +93,7 @@
 }
 
 .logoImgWrapper {
-  width: 100%;
+  width: 130px;
   aspect-ratio: 2 / 1;
   border-radius: 12px;
   overflow: hidden;

@@ -231,6 +231,33 @@
   font-weight: 500;
 }
 
+.table th:nth-child(3),
+.table td:nth-child(3) {
+  width: 130px;
+}
+
+.priceCell {
+  vertical-align: middle;
+}
+
+.priceWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.newPriceAdmin {
+  font-weight: 700;
+  color: #111;
+  font-size: 0.95rem;
+}
+
+.oldPriceAdmin {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+
 .stockLow {
   color: #f87171;
   font-weight: 700;

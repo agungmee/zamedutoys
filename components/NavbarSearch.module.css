@@ -144,10 +144,22 @@
   overflow: hidden;
 }
 
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .price {
   font-size: 0.85rem;
   color: #ee4d2d;
   font-weight: 500;
+}
+
+.oldPrice {
+  font-size: 0.75rem;
+  color: #999;
+  text-decoration: line-through;
 }
 
 .viewAll {

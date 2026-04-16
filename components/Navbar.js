@@ -6,10 +6,10 @@ import NavbarSearch from './NavbarSearch';
 import styles from './Navbar.module.css';
 
 const navItems = [
-  { href: '/',         label: 'Home',       icon: '🏠',  desc: 'Kembali ke Beranda' },
-  { href: '/kategori', label: 'Kategori',   icon: '🏷️',  desc: 'Jelajahi koleksi kami' },
-  { href: '/kontak',   label: 'Kontak',     icon: '📞',  desc: 'Hubungi kami' },
-  { href: '/grosir',   label: 'Beli Grosir',icon: '📦',  desc: 'Harga spesial untuk reseller', highlight: true },
+  { href: '/',             label: 'Home',         icon: '🏠',  desc: 'Kembali ke Beranda' },
+  { href: '/cara-pesan',   label: 'Cara Pesan',   icon: '📝',  desc: 'Panduan pemesanan produk' },
+  { href: '/garansi',      label: 'Garansi',      icon: '🛡️',  desc: 'Info garansi & layanan' },
+  { href: '/grosir',       label: 'Beli Grosir',  icon: '📦',  desc: 'Harga spesial untuk reseller', highlight: true },
 ];
 
 export default function Navbar() {

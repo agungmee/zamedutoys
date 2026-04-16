@@ -10,14 +10,18 @@ import * as XLSX from 'xlsx';
 export async function getProducts({ category, search, limit, featured } = {}) {
   const supabase = await createClient();
 
+  const selectQuery = category 
+    ? '*, categories!inner(*), product_variants(*)' 
+    : '*, categories(*), product_variants(*)';
+
   let query = supabase
     .from('products')
-    .select('*, categories(*), product_variants(*)')
+    .select(selectQuery)
     .eq('is_active', true)
     .filter('images', 'neq', '{}')
     .order('created_at', { ascending: false });
 
-  if (category) query = query.eq('category', category);
+  if (category) query = query.eq('categories.name', category);
   if (search) query = query.ilike('title', `%${search}%`);
   if (featured !== undefined) query = query.eq('is_featured', featured);
   if (limit) query = query.limit(limit);
@@ -109,6 +113,7 @@ export async function createProduct(prevState, formData) {
     title: formData.get('title'),
     description: formData.get('description'),
     price: Number(formData.get('price')) || 0,
+    original_price: Number(formData.get('original_price')) || null,
     price_grosir: Number(formData.get('price_grosir')) || null,
     category_id: formData.get('category_id') || null,
     brand: formData.get('brand') || 'ZAM Edutoys',
@@ -123,6 +128,8 @@ export async function createProduct(prevState, formData) {
     is_preorder: formData.get('is_preorder') === 'true',
     preorder_days: Number(formData.get('preorder_days')) || 7,
     video_url: formData.get('video_url') || null,
+    weight_kg: Number(formData.get('weight_kg')) || 0,
+    dimensions: formData.get('dimensions') || '',
   };
 
   // --- HANDLE VIDEO UPLOAD ---
@@ -164,6 +171,7 @@ export async function createProduct(prevState, formData) {
             product_id: newProd.id,
             name: v.name,
             price: Number(v.price) || product.price,
+            original_price: Number(v.original_price) || null,
             image_url: vImageUrl || null,
             stock: Number(v.stock) || 0,
             is_default: v.is_default || false
@@ -210,6 +218,7 @@ export async function updateProduct(id, prevState, formData) {
     title: formData.get('title'),
     description: formData.get('description'),
     price: Number(formData.get('price')) || 0,
+    original_price: Number(formData.get('original_price')) || null,
     price_grosir: Number(formData.get('price_grosir')) || null,
     category_id: formData.get('category_id') || null,
     brand: formData.get('brand') || 'ZAM Edutoys',
@@ -224,6 +233,8 @@ export async function updateProduct(id, prevState, formData) {
     is_preorder: formData.get('is_preorder') === 'true',
     preorder_days: Number(formData.get('preorder_days')) || 7,
     video_url: formData.get('video_url') || null,
+    weight_kg: Number(formData.get('weight_kg')) || 0,
+    dimensions: formData.get('dimensions') || '',
   };
 
   // --- HANDLE VIDEO UPLOAD ---
@@ -267,6 +278,7 @@ export async function updateProduct(id, prevState, formData) {
             product_id: id,
             name: v.name,
             price: Number(v.price) || updates.price,
+            original_price: Number(v.original_price) || null,
             image_url: vImageUrl || null,
             stock: Number(v.stock) || 0,
             is_default: v.is_default || false
@@ -421,6 +433,7 @@ export async function importProductsExcel(prevState, formData) {
           tags: (baseRow['Tags (Pisah Koma)'] || '').split(',').map(s => s.trim()).filter(Boolean),
           images: galleryImages,
           price: Number(variantsInGroup[0]['Harga Varian']) || 0, // Fallback price
+          original_price: Number(variantsInGroup[0]['Harga Coret']) || null,
           stock: variantsInGroup.reduce((acc, r) => acc + (Number(r['Stok Varian']) || 0), 0),
           is_active: true,
           is_featured: false,
@@ -444,6 +457,7 @@ export async function importProductsExcel(prevState, formData) {
             product_id: newProd.id,
             name: r['Nama Varian'] || 'Default',
             price: Number(r['Harga Varian']) || product.price,
+            original_price: Number(r['Harga Coret']) || null,
             stock: Number(r['Stok Varian']) || 0,
             image_url: r['Gambar Varian (URL)'] || null,
             is_default: isDefault

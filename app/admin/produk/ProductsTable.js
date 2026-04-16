@@ -109,8 +109,17 @@ export default function ProductsTable({ products }) {
                   <td>
                     <span className={styles.categoryTag}>{product.category || '—'}</span>
                   </td>
-                  <td className={styles.price}>
-                    Rp {Number(product.price).toLocaleString('id-ID')}
+                  <td className={styles.priceCell}>
+                    <div className={styles.priceWrapper}>
+                      {product.original_price && (
+                        <span className={styles.oldPriceAdmin}>
+                          Rp {Number(product.original_price).toLocaleString('id-ID')}
+                        </span>
+                      )}
+                      <span className={styles.newPriceAdmin}>
+                        Rp {Number(product.price).toLocaleString('id-ID')}
+                      </span>
+                    </div>
                   </td>
                   <td>
                     <span className={product.stock <= 5 ? styles.stockLow : styles.stockOk}>

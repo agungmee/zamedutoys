@@ -4,18 +4,27 @@ import ProductCard from '@/components/ProductCard';
 import ProductModal from '@/components/ProductModal';
 import styles from './Produk.module.css';
 
-export default function ProdukClient({ products = [], sortParam = 'terbaru' }) {
+export default function ProdukClient({ products = [], sortParam = 'terbaru', categoryParam }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const title = categoryParam 
+    ? `Koleksi ${categoryParam}` 
+    : (sortParam === 'terbaru' ? 'Produk Terbaru' : 'Produk Terlaris');
 
   return (
     <main className={styles.main}>
       <div className={styles.container}>
         <header className={styles.header}>
-          <h1 className={styles.title}>
-            {sortParam === 'terbaru' ? 'Produk Terbaru' : 'Produk Terlaris'}
-          </h1>
+          {categoryParam && (
+            <a href="/produk" className={styles.backLink} style={{ display: 'block', marginBottom: '1rem', color: '#666', textDecoration: 'none' }}>
+              ← Lihat Semua Produk
+            </a>
+          )}
+          <h1 className={styles.title}>{title}</h1>
           <p className={styles.subtitle}>
-            Jelajahi koleksi mainan edukasi premium terbaik untuk buah hati Anda.
+            {categoryParam 
+              ? `Menampilkan produk terbaik untuk kategori ${categoryParam.toLowerCase()}.`
+              : 'Jelajahi koleksi mainan edukasi premium terbaik untuk buah hati Anda.'}
           </p>
         </header>
 

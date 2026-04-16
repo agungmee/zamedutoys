@@ -29,11 +29,11 @@ function adaptProduct(p) {
   };
 }
 
-async function ProdukContent({ sortParam }) {
+async function ProdukContent({ sortParam, categoryParam }) {
   let products = [];
   try {
     // Logic sorting sederhana: terbaru = order by created_at desc (default di getProducts)
-    products = await getProducts();
+    products = await getProducts({ category: categoryParam });
 
     // Jika ada logika khusus untuk 'terlaris', bisa ditambahkan di sini
     // Untuk saat ini kita gunakan data yang sama
@@ -47,6 +47,7 @@ async function ProdukContent({ sortParam }) {
     <ProdukClient
       products={adaptedProducts}
       sortParam={sortParam}
+      categoryParam={categoryParam}
     />
   );
 }
@@ -61,11 +62,11 @@ export const metadata = {
 };
 
 export default async function ProdukPage({ searchParams }) {
-  const { sort = 'terbaru' } = await searchParams;
+  const { sort = 'terbaru', category } = await searchParams;
 
   return (
     <Suspense fallback={<div className={styles.loading}>Memuat produk...</div>}>
-      <ProdukContent sortParam={sort} />
+      <ProdukContent sortParam={sort} categoryParam={category} />
     </Suspense>
   );
 }

@@ -10,6 +10,7 @@ function adaptProduct(p) {
     id: p.id,
     title: p.title,
     price: p.price,
+    original_price: p.original_price,
     rating: p.rating,
     sold: p.sold,
     media: p.images || [],
@@ -103,7 +104,12 @@ export default function NavbarSearch() {
                   )}
                   <div className={styles.info}>
                     <div className={styles.title}>{p.title}</div>
-                    <div className={styles.price}>Rp {p.price.toLocaleString('id-ID')}</div>
+                    <div className={styles.priceRow}>
+                      <span className={styles.price}>Rp {p.price.toLocaleString('id-ID')}</span>
+                      {p.original_price && p.original_price > p.price && (
+                        <span className={styles.oldPrice}>Rp {p.original_price.toLocaleString('id-ID')}</span>
+                      )}
+                    </div>
                   </div>
                 </li>
               ))}
