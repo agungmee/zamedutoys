@@ -159,6 +159,12 @@
     gap: 2.5rem;
   }
 
+  .headingRow {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
   .heading {
     font-size: 1.4rem;
   }
@@ -171,8 +177,8 @@
   }
 
   .logos {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 0.8rem;
+    justify-content: center;
+    gap: 1rem;
   }
 
   .footer {
