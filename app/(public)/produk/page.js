@@ -11,6 +11,7 @@ function adaptProduct(p) {
     id: p.id,
     title: p.title,
     price: p.price,
+    original_price: p.original_price,
     rating: p.rating,
     sold: p.sold,
     media: p.images || [],
